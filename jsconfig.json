@@ -8,9 +8,10 @@
       "@/models/*": ["src/models/*"],
       "@/module/*": ["src/components/module/*"],
       "@/template/*": ["src/components/template/*"],
-      "@/providers/*": ["src/components/layout/*"],
-      "@/layout/*": ["src/providers/*"],
+      "@/providers/*":  ["src/providers/*"],
+      "@/layout/*":["src/components/layout/*"],
       "@/api/*": ["src/app/api/*"],
     }
+
   }
 }
