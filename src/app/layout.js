@@ -1,6 +1,6 @@
 import { yekan } from "@/utils/fonts";
 import "./globals.css";
-import Layout from "@/providers/Layout";
+import Layout from "@/layout/Layout";
 
 
 
