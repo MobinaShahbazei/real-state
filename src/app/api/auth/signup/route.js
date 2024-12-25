@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
-import { hashPassword, hashPassword } from "@/utils/auth";
+import { hashPassword} from "@/utils/auth";
 
 export async function POST(req) {
   try {
@@ -27,7 +27,7 @@ export async function POST(req) {
     const newUser = await User.create({email : email, password:hashedPassword})
     console.log(newUser)
 
-    return NextResponse.json({message: "حساب کاربری ایجاد شد"})
+    return NextResponse.json({message: "حساب کاربری ایجاد شد"}, {status: 201})
   } catch (error) {
     console.log(error);
     return NextResponse.json(
