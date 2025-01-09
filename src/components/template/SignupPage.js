@@ -10,7 +10,7 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRePassword] = useState("");
-  const [loading, setsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -21,14 +21,14 @@ function SignupPage() {
       toast.error("رمز و تکرار ان برابر نیست");
       return;
     }
-    setsLoading(true);
+    setLoading(true);
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
-    setsLoading(false);
+    setLoading(false);
     if (res.status === 201) {
       router.push("/signin");
     } else {
