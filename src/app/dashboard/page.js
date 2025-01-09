@@ -1,8 +1,9 @@
+const { default: DashboardPage } = require("@/template/DashboardPage");
 
 
 function Dashboard() {
   return (
-    <div>page</div>
+    <DashboardPage/>
   )
 }
 
