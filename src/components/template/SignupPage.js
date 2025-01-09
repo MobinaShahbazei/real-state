@@ -9,7 +9,7 @@ import { ThreeDots } from "react-loader-spinner";
 function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repassword, setRePassword] = useState("");
+  const [repassword, setRePassword] = useState(""); 
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
