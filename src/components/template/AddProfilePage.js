@@ -1,4 +1,5 @@
 "use client";
+import RadioList from "@/module/RadioList";
 import TextInput from "@/module/TextInput";
 import styles from "@/template/AddProfilePage.module.css";
 import { useState } from "react";
@@ -59,6 +60,7 @@ function AddProfilePage() {
         profileData={profileData}
         setProfileData={setProfileData}
       />
+      <RadioList profileData={profileData} setProfileData={setProfileData}/>
       <button className={styles.submit} onClick={submitHandler}>ثبت اگهی</button>
     </div>
   );
