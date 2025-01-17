@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 
 function AddProfilePage() {
+  const [loading, setLoading] = useState(false);
   const [profileData, setProfileData] = useState({
     title: "",
     description: "",
@@ -29,7 +30,7 @@ function AddProfilePage() {
       headers: { "Content-Type": "application/json" },
     });
 
-    const [loading, setLoading] = useState(false);
+ 
     const data = await res.json();
     setLoading(false);
     if (data.error) {
@@ -38,6 +39,8 @@ function AddProfilePage() {
       toast.success(data.message);
     }
   };
+
+  
   return (
     <div className={styles.container}>
       <h3>ثبت اگهی</h3>
@@ -62,13 +65,13 @@ function AddProfilePage() {
       />
       <TextInput
         title="شماره تماس"
-        name=" phone"
+        name="phone"
         profileData={profileData}
         setProfileData={setProfileData}
       />
       <TextInput
         title="قیمت(تومان)"
-        name=" price"
+        name="price"
         profileData={profileData}
         setProfileData={setProfileData}
       />

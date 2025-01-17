@@ -8,24 +8,26 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     await connectDB();
-    const body = await req.json();
+
     const {
       title,
       description,
       location,
       phone,
-      price,
       realState,
+      price,
       constructionDate,
       category,
-      rules,
       amenities,
-    } = body;
+      rules,
+    } = await req.json();
 
-    const session = getServerSession(req);
+    const session = await getServerSession(req);
     if (!session) {
       return NextResponse.json(
-        { error: "لطفا وارد حساب کاربری خود شوید" },
+        {
+          error: "لطفا وارد حساب کاربری خود شوید",
+        },
         { status: 401 }
       );
     }
@@ -40,11 +42,11 @@ export async function POST(req) {
 
     if (
       !title ||
-      !description ||
       !location ||
+      !description ||
       !phone ||
-      !price ||
       !realState ||
+      !price ||
       !constructionDate ||
       !category
     ) {
@@ -59,20 +61,25 @@ export async function POST(req) {
       description,
       location,
       phone,
-      price: +price,
       realState,
       constructionDate,
-      category,
-      rules,
       amenities,
+      rules,
+      category,
+      price: +price,
       userId: new Types.ObjectId(user._id),
     });
-    return NextResponse.json({ message: "اگهی اضافه شد" }, { status: 201 });
-  } catch (error) {
-    console.log(error);
+    console.log(newProfile);
+    return NextResponse.json(
+      { message: "آگهی جدید اضافه شد" },
+      { status: 201 }
+    );
+  } catch (err) {
+    console.log(err);
     return NextResponse.json(
       { error: "مشکلی در سرور رخ داده است" },
       { status: 500 }
     );
   }
 }
+
