@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import User from "@/models/User";
+import MyProgilePage from "@/template/MyProgilePage";
 import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth";
 
@@ -17,7 +18,9 @@ async function MyProfiles() {
       },
     },
   ]);
-  return <div>MyProfiles</div>;
+  return (
+    <MyProgilePage profiles={user.profiles}/>
+  )
 }
 
 export default MyProfiles;
