@@ -10,7 +10,9 @@ function DashboardCard({ data }) {
   const editHandler = () => {
     router.push(`/dashboard/my-profiles/${data._id}`);
   };
-  const deleteHandler = () => {};
+  const deleteHandler = () => {
+    
+  };
   return (
     <div className={styles.container}>
       <Card data={data} />

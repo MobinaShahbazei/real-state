@@ -4,11 +4,11 @@ import RadioList from "@/module/RadioList";
 import TextInput from "@/module/TextInput";
 import TextList from "@/module/TextList";
 import styles from "@/template/AddProfilePage.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 
-function AddProfilePage() {
+function AddProfilePage({ data }) {
   const [loading, setLoading] = useState(false);
   const [profileData, setProfileData] = useState({
     title: "",
@@ -22,6 +22,10 @@ function AddProfilePage() {
     rules: [],
     amenities: [],
   });
+
+  useEffect(() => {
+    if(data) setProfileData(data)
+  }, [])
   const submitHandler = async () => {
     setLoading(true);
     const res = await fetch("/api/profile", {
@@ -30,7 +34,6 @@ function AddProfilePage() {
       headers: { "Content-Type": "application/json" },
     });
 
- 
     const data = await res.json();
     setLoading(false);
     if (data.error) {
@@ -39,11 +42,12 @@ function AddProfilePage() {
       toast.success(data.message);
     }
   };
+ const editHandler = () => {
 
-  
+ }
   return (
     <div className={styles.container}>
-      <h3>ثبت اگهی</h3>
+      <h3>{data ? "ویرایش اگهی " : "ثبت اگهی"}</h3>
       <TextInput
         title="عنوان اگهی"
         name="title"
@@ -100,14 +104,17 @@ function AddProfilePage() {
       />
       <Toaster />
       {loading ? (
-        <ThreeDots 
-        color="#304ffe"
-        ariaLabel="three-dots-loading"
-        visible={true}
-        wrapperStyle={{margin: "auto"}}
-        height={45}
-        
+        <ThreeDots
+          color="#304ffe"
+          ariaLabel="three-dots-loading"
+          visible={true}
+          wrapperStyle={{ margin: "auto" }}
+          height={45}
         />
+      ) : data ? (
+        <button className={styles.submit} onClick={editHandler}>
+        ویرایش اگهی
+        </button>
       ) : (
         <button className={styles.submit} onClick={submitHandler}>
           ثبت اگهی
