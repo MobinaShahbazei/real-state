@@ -151,7 +151,7 @@ export async function PATCH(req) {
     profile.category = category;
     profile.save();
     return NextResponse.json(
-      { error: "اگهی با موفقیت ویرایش شد" },
+      { message: "اگهی با موفقیت ویرایش شد" },
       { status: 200 }
     );
   } catch (error) {

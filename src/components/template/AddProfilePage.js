@@ -4,12 +4,14 @@ import RadioList from "@/module/RadioList";
 import TextInput from "@/module/TextInput";
 import TextList from "@/module/TextList";
 import styles from "@/template/AddProfilePage.module.css";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 
 function AddProfilePage({ data }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const [profileData, setProfileData] = useState({
     title: "",
     description: "",
@@ -22,10 +24,10 @@ function AddProfilePage({ data }) {
     rules: [],
     amenities: [],
   });
-
   useEffect(() => {
-    if(data) setProfileData(data)
-  }, [])
+    if (data) setProfileData(data);
+  }, []);
+
   const submitHandler = async () => {
     setLoading(true);
     const res = await fetch("/api/profile", {
@@ -33,18 +35,38 @@ function AddProfilePage({ data }) {
       body: JSON.stringify(profileData),
       headers: { "Content-Type": "application/json" },
     });
-
     const data = await res.json();
     setLoading(false);
     if (data.error) {
       toast.error(data.error);
     } else {
       toast.success(data.message);
+      router.refresh();
     }
   };
- const editHandler = () => {
 
- }
+  const editHandler = async () => {
+    setLoading(true);
+    const res = await fetch("/api/profile", {
+      method: "PATCH",
+      body: JSON.stringify(profileData),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (data.error) {
+      toast.error(data.error);
+    } else {
+      toast.success(data.message);
+      router.refresh();
+    }
+
+
+  
+
+
+    
+  };
   return (
     <div className={styles.container}>
       <h3>{data ? "ویرایش اگهی " : "ثبت اگهی"}</h3>
@@ -113,7 +135,7 @@ function AddProfilePage({ data }) {
         />
       ) : data ? (
         <button className={styles.submit} onClick={editHandler}>
-        ویرایش اگهی
+          ویرایش اگهی
         </button>
       ) : (
         <button className={styles.submit} onClick={submitHandler}>
