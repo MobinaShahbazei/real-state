@@ -10,6 +10,7 @@ import { GiOfficeChair } from "react-icons/gi";
 import ItemList from "@/module/ItemList";
 import Title from "@/module/Title";
 import { e2p, sp } from "@/utils/replaceNumber";
+import ShareButton from "@/module/ShareButton";
 
 function DetailsPage({ data: { title, description, location, phone, realState, phone,
     price,category, constructionDate} }) {
@@ -50,6 +51,7 @@ function DetailsPage({ data: { title, description, location, phone, realState, p
             </span>
 
         </div>
+        <ShareButton/>
         <div className={styles.price}>
             <p>{icons[category]}{categories[category]}</p>
             <p>{sp(price)}تومان </p>
