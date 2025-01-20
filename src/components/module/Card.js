@@ -8,7 +8,7 @@ import { GiOfficeChair } from "react-icons/gi";
 import { sp } from "@/utils/replaceNumber";
 import Link from "next/link";
 
-function Card({ data: { title, location, price, category } }) {
+function Card({ data: { _id,title, location, price, category } }) {
   const icons = {
     villa: <RiHome3Line />,
     apartment: <MdApartment />,
@@ -24,7 +24,7 @@ function Card({ data: { title, location, price, category } }) {
         <HiOutlineLocationMarker />
       </p>
       <span>{sp(price)} تومان</span>
-      <Link href="/">مشاهده اگهی 
+      <Link href={`/buy-residential/${_id}`}>مشاهده اگهی 
       <BiLeftArrowAlt/>
       </Link>
     </div>
